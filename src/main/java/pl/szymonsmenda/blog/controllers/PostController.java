@@ -11,7 +11,7 @@ import pl.szymonsmenda.blog.models.services.PostService;
 import pl.szymonsmenda.blog.models.services.SessionService;
 
 @Controller
-public class PostController {
+public class PostController{
 
     final PostService postService;
     final SessionService sessionService;
@@ -25,11 +25,9 @@ public class PostController {
         this.commentService = commentService;
     }
 
-
-
     @GetMapping("/post")
     public String post(Model model) {
-        if(!sessionService.isLogin()){
+        if (!sessionService.isLogin()) {
             return "redirect:/login";
         }
         model.addAttribute("postForm", new PostForm());
@@ -37,7 +35,7 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public String post(@ModelAttribute("postForm") PostForm postForm){
+    public String post(@ModelAttribute("postForm") PostForm postForm) {
         postService.addPost(postForm);
         return "redirect:/";
     }
@@ -45,17 +43,17 @@ public class PostController {
 
     @GetMapping("/post/{id}")
     public String post(@PathVariable("id") int id,
-                       Model model){
+                       Model model) {
 
-        model.addAttribute("postData",  postService.getAllPostData(id));
+        model.addAttribute("postData", postService.getAllPostData(id));
         model.addAttribute("commentForm", new CommentForm());
         return "showPost";
     }
 
     @PostMapping("/comment/{id}")
     public String comment(@PathVariable("id") int postId,
-                          @ModelAttribute("commentForm") CommentForm comment){
-        if(!sessionService.isLogin()){
+                          @ModelAttribute("commentForm") CommentForm comment) {
+        if (!sessionService.isLogin()) {
             return "redirect:/login";
         }
         commentService.addComment(comment, postId);
@@ -63,7 +61,7 @@ public class PostController {
     }
 
     @GetMapping("/post/delete/{id}")
-    public String delete(@PathVariable("id") int postId){
+    public String delete(@PathVariable("id") int postId) {
         if (sessionService.isLogin() && sessionService.getUserEntity().getPosts()
                 .stream()
                 .anyMatch(s -> s.getId() == postId)) {

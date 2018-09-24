@@ -13,7 +13,7 @@ import pl.szymonsmenda.blog.models.services.AuthService;
 import pl.szymonsmenda.blog.models.services.SessionService;
 
 @Controller
-public class AuthController {
+public class AuthController{
 
     final AuthService authService;
 
@@ -35,7 +35,7 @@ public class AuthController {
     public String login(@RequestParam("email") String email,
                         @RequestParam("password") String password,
                         Model model) {
-        if(!authService.tryLogin(email, password)){
+        if (!authService.tryLogin(email, password)) {
             model.addAttribute("infoAboutLogin", "Nieprawidłowy login lub hasło");
             return "login";
         }
@@ -51,8 +51,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute("registerForm") RegisterForm registerForm,
-                           Model model){
-        if(!authService.tryToRegister(registerForm)){
+                           Model model) {
+        if (!authService.tryToRegister(registerForm)) {
             model.addAttribute("infoAboutRegister", "Email zajęty");
             return "register";
         }
@@ -60,7 +60,7 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public String logout(){
+    public String logout() {
         sessionService.setLogin(false);
         sessionService.setUserEntity(null);
 

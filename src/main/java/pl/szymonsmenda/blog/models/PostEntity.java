@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "post")
-public class PostEntity {
+public class PostEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -17,7 +17,7 @@ public class PostEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
-    
+
     private String title;
     private String context;
     @Column(name = "creation_time")

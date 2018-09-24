@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "comment")
-public class CommentEntity {
+public class CommentEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

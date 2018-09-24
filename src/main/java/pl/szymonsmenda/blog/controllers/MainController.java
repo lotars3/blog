@@ -8,10 +8,11 @@ import pl.szymonsmenda.blog.models.services.PostService;
 import pl.szymonsmenda.blog.models.services.SessionService;
 
 @Controller
-public class MainController {
+public class MainController{
 
     final SessionService sessionService;
     final PostService postService;
+
     @Autowired
     public MainController(SessionService sessionService, PostService postService) {
         this.sessionService = sessionService;
@@ -23,8 +24,6 @@ public class MainController {
     public String index(Model model) {
         model.addAttribute("userObject", sessionService);
         model.addAttribute("posts", postService.getAllPosts());
-
-
         return "index";
     }
 

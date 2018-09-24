@@ -7,6 +7,6 @@ import pl.szymonsmenda.blog.models.CommentEntity;
 import java.util.List;
 
 @Repository
-public interface CommentRepository extends CrudRepository<CommentEntity, Integer> {
+public interface CommentRepository extends CrudRepository<CommentEntity, Integer>{
     List<CommentEntity> findAllByPost_Id(int id);
 }
